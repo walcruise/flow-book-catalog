@@ -1,5 +1,4 @@
 pub contract BookContract {
-    // Define the Book struct
     pub struct Book {
         pub let title: String
         pub let author: String
@@ -25,14 +24,12 @@ pub contract BookContract {
         }
     }
 
-    // Store all books
     pub var books: {String: Book}
 
     init() {
         self.books = {}
     }
 
-    // Function to add a new book using ISBN as key
     pub fun addBook(
         title: String,
         author: String,
@@ -49,11 +46,9 @@ pub contract BookContract {
             genre: genre,
             isAvailable: isAvailable
         )
-        
         self.books[isbn] = newBook
     }
 
-    // Function to get a book by ISBN
     pub fun getBook(isbn: String): Book? {
         return self.books[isbn]
     }
