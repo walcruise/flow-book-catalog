@@ -1,11 +1,11 @@
-pub contract BookContract {
-    pub struct Book {
-        pub let title: String
-        pub let author: String
-        pub let isbn: String
-        pub let yearPublished: UInt64
-        pub let genre: String
-        pub let isAvailable: Bool
+access(all) contract BookContract {
+    access(all) struct Book {
+        access(all) let title: String
+        access(all) let author: String
+        access(all) let isbn: String
+        access(all) let yearPublished: UInt64
+        access(all) let genre: String
+        access(all) let isAvailable: Bool
 
         init(
             title: String,
@@ -24,13 +24,13 @@ pub contract BookContract {
         }
     }
 
-    pub var books: {String: Book}
+    access(all) var books: {String: Book}
 
     init() {
         self.books = {}
     }
 
-    pub fun addBook(
+    access(all) fun addBook(
         title: String,
         author: String,
         isbn: String,
@@ -49,7 +49,7 @@ pub contract BookContract {
         self.books[isbn] = newBook
     }
 
-    pub fun getBook(isbn: String): Book? {
+    access(all) fun getBook(isbn: String): Book? {
         return self.books[isbn]
     }
 }
