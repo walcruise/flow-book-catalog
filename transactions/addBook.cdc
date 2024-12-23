@@ -8,8 +8,13 @@ transaction(
     genre: String,
     isAvailable: Bool
 ) {
-    prepare(signer: AuthAccount) {
-        BookContract.addBook(
+    prepare(acct: AuthAccount) {
+        let contractRef = getAccount(0x01)
+            .contracts
+            .borrow<&BookContract>()
+            ?? panic("Could not borrow reference to contract")
+        
+        contractRef.addBook(
             title: title,
             author: author,
             isbn: isbn,
@@ -18,5 +23,9 @@ transaction(
             isAvailable: isAvailable
         )
         log("Added book with ISBN: ".concat(isbn))
+    }
+
+    execute {
+        // The execute phase is empty since we did everything in prepare
     }
 }
